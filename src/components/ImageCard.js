@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 function ImageCard(props) {
     const [imageUrl, setImageUrl] = useState("https://cdn-icons-png.flaticon.com/128/159/159469.png")
-    const {cardInfo} = props;
+    const {cardInfo, handleUpdate, deleteImage} = props;
 
     useEffect(()=>{
         isValidImage(cardInfo.src)
@@ -24,8 +24,8 @@ function ImageCard(props) {
 
     return <div className="image-card">
         <div className="action-buttons">
-            <button onClick={()=>{props.handleUpdate(cardInfo)}}><img src="https://cdn-icons-png.flaticon.com/128/10336/10336582.png" alt="edit"/></button>
-            <button><img src="https://cdn-icons-png.flaticon.com/128/9790/9790368.png" alt="delete"/></button>
+            <button onClick={()=>{handleUpdate(cardInfo)}}><img src="https://cdn-icons-png.flaticon.com/128/10336/10336582.png" alt="edit"/></button>
+            <button onClick={()=>{deleteImage(cardInfo.id)}}><img src="https://cdn-icons-png.flaticon.com/128/9790/9790368.png" alt="delete"/></button>
         </div>
         <div className="image-thumbnail">
             <img src={imageUrl} alt={cardInfo.title} />

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import ImageForm from "./ImageForm";
 import ImageCard from "./ImageCard";
-import { addDoc, collection, doc, onSnapshot, query, updateDoc, where } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, onSnapshot, query, updateDoc, where } from "firebase/firestore";
 import { db } from "../firebase.config";
 
 function ImageContainer(props) {
@@ -30,6 +30,10 @@ function ImageContainer(props) {
         await updateDoc(doc(db, 'images', imageData.id), imageData);
         toggleForm();
     }
+    // Function to delete Image
+    async function deleteImage(id) {
+        await deleteDoc(doc(db, "images", id));
+    }
     // function to handle onClick of edit button
     function handleUpdate(updateData){
         setIsFormOpen(true);
@@ -43,7 +47,7 @@ function ImageContainer(props) {
         <button className={isFormOpen?"button red-outline":"button blue-outline"} onClick={toggleForm}>{isFormOpen?"Cancel":"Add image"}</button>
     </div>
     <div className="image-card-container">
-        {imagesList.map(image=><ImageCard key={image.id} cardInfo={image} handleUpdate={handleUpdate}/>)}
+        {imagesList.map(image=><ImageCard key={image.id} cardInfo={image} handleUpdate={handleUpdate} deleteImage={deleteImage}/>)}
     </div>
     </div>
 }
