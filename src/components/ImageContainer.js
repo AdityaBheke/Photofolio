@@ -8,13 +8,14 @@ function ImageContainer(props) {
     const [imagesList, setImagesList] = useState([]);
     const [isFormOpen, setIsFormOpen] = useState(false);
     const [formData, setFormData] = useState(null);
+    const {album, handleBack} = props;
 
     useEffect(()=>{
-        onSnapshot(query(collection(db, 'images'),where("albumId","==", props.album.id)),(snapshot)=>{
+        onSnapshot(query(collection(db, 'images'),where("albumId","==", album.id)),(snapshot)=>{
             const imageDocs = snapshot.docs.map(doc=>{return {id:doc.id, ...doc.data()}})
             setImagesList(imageDocs);
         })
-    },[props.album])
+    },[album])
 
     // Function to toggle addForm
     function toggleForm() {
@@ -23,7 +24,7 @@ function ImageContainer(props) {
     }
     // Function to add Image
     async function addImage(title, src){
-        await addDoc(collection(db, 'images'), {title, src, albumId: props.album.id})
+        await addDoc(collection(db, 'images'), {title, src, albumId: album.id})
     }
     // Function to update Image
     async function updateImage(imageData) {
@@ -42,8 +43,8 @@ function ImageContainer(props) {
     return <div className="container">
     {isFormOpen && <ImageForm addImage={addImage} updateImage={updateImage} formData={formData}/>}
     <div className="header">
-        <button>Back</button>
-        <h1>Images in {props.album.title}</h1>
+        <button className="back-button" onClick={handleBack}><img src="https://cdn-icons-png.flaticon.com/128/2099/2099238.png" alt="back"/></button>
+        <h1>Images in {album.title}</h1>
         <button className={isFormOpen?"button red-outline":"button blue-outline"} onClick={toggleForm}>{isFormOpen?"Cancel":"Add image"}</button>
     </div>
     <div className="image-card-container">

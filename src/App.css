@@ -213,4 +213,16 @@ nav{
 .action-buttons button:hover img{
   transform: scale(0.95);
 }
-
+.back-button{
+  /* padding: 1rem; */
+  height: 3rem;
+  aspect-ratio: 1;
+  border: none;
+  border-radius: 50%;
+  background-color: transparent;
+  box-shadow: 0px 0px 5px 5px #eeeeee;
+}
+.back-button img{
+  height: 2rem;
+  width: 2rem;
+}

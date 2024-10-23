@@ -11,7 +11,9 @@ function App() {
   useEffect(()=>{
     setType('albumsList')
   }, [])
-
+  function handleBack() {
+    setType('albumsList')
+  }
   function handleSelect(contentType, album){
     setType(contentType);
     setAlbum(album);
@@ -20,7 +22,7 @@ function App() {
     <div className="App">
       <Navbar/>
       {type==="albumsList"?<AlbumContainer handleSelect={handleSelect}/>:<></>}
-      {type==="imagesList"?<ImageContainer album={album}/>:<></>}
+      {type==="imagesList"?<ImageContainer album={album} handleBack={handleBack}/>:<></>}
 
     </div>
   );
