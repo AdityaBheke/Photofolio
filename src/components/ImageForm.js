@@ -1,11 +1,22 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 
 function ImageForm(props){
     const titleRef = useRef(null);
     const urlRef = useRef(null);
+    const {formData, addImage, updateImage} = props;
+    useEffect(()=>{
+        if (formData) {
+            titleRef.current.value = formData.title
+            urlRef.current.value = formData.src
+        }
+    },[formData])
     function handleSubmit(e){
         e.preventDefault();
-        props.addImage(titleRef.current.value, urlRef.current.value);
+        if (formData) {
+            updateImage({id:formData.id, title: titleRef.current.value, src: urlRef.current.value})
+        }else{
+            addImage(titleRef.current.value, urlRef.current.value);
+        }
         clearForm();
     }
     function clearForm(){
@@ -13,12 +24,12 @@ function ImageForm(props){
         urlRef.current.value = "";
     }
     return <form className="form" onSubmit={handleSubmit}>
-    <label>Add an Image</label>
+    <label>{formData?"Update":"Add"} an Image</label>
     <input ref={titleRef} placeholder="Image name" required/>
     <input ref={urlRef} placeholder="Image Url" required/>
     <div className="button-container">
         <button type="reset" className="button red-fill">Clear</button>
-        <button type="submit" className="button blue-fill">Add</button>
+        <button type="submit" className="button blue-fill">{formData?"Update":"Add"}</button>
     </div>
     
 </form>
