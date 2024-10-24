@@ -56,9 +56,10 @@ function ImageContainer(props) {
     {isFormOpen && <ImageForm addImage={addImage} updateImage={updateImage} formData={formData}/>}
     <div className="header">
         <button className="back-button" onClick={handleBack}><img src="https://cdn-icons-png.flaticon.com/128/2099/2099238.png" alt="back"/></button>
-        <h1>Images in {album.title}</h1>
+        <h1>{album.title}</h1>
         <button className={isFormOpen?"button red-outline":"button blue-outline"} onClick={toggleForm}>{isFormOpen?"Cancel":"Add image"}</button>
     </div>
+    {imagesList.length<=0 && <h1 className="empty-list">No Images found in {album.title}</h1>}
     <div className="image-card-container">
         {imagesList.map((image,index)=><ImageCard key={image.id} cardInfo={image} index={index} handleSelect={handleSelect} handleUpdate={handleUpdate} deleteImage={deleteImage}/>)}
     </div>

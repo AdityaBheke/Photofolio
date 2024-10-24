@@ -31,6 +31,7 @@ function AlbumContainer(props) {
         <h1>Your Albums</h1>
         <button className={isFormOpen?"button red-outline":"button blue-outline"} onClick={toggleForm}>{isFormOpen?"Cancel":"Add album"}</button>
     </div>
+    {albumsList.length<=0 && <h1 className="empty-list">You don't have any album</h1>}
     <div className="card-container">
         {albumsList.map(album=><AlbumCard key={album.id} cardInfo={album} handleSelect={props.handleSelect}/>)}
     </div>

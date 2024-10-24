@@ -10,8 +10,6 @@ function Carousel(props){
     },[selectedIndex])
     function handleNext(){
         if (currentIndex < imagesList.length-1) {
-            console.log(currentIndex, imagesList.length);
-            
             setCurrentIndex(currentIndex+1)
         } else {
             setCurrentIndex(0)
