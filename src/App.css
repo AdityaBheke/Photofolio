@@ -24,6 +24,7 @@ nav{
   color: white;
   text-shadow: 3px 4px 3px #525252;
   margin-left: 1.5rem;
+  width: fit-content;
   display: flex;
   gap: 1rem;
   align-items: center;
@@ -76,6 +77,7 @@ nav{
 .header{
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 2rem 0rem;
 }
 .button{
@@ -235,7 +237,7 @@ nav{
   left: 0;
   height: 100%;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.8);
   z-index: 2;
   display: flex;
   gap: 2rem;
@@ -243,10 +245,9 @@ nav{
   justify-content: center;
 }
 .carousel-image{
-  height: 80%;
+  height: 90%;
   width: 80%;
   object-fit: contain;
-  /* background-color: red; */
 }
 .carousel-button{
   height: 4rem;
@@ -264,4 +265,106 @@ nav{
   position: absolute;
   top: 50px;
   right: 50px;
+}
+
+@media screen and (max-width: 1500px) {
+  .container{
+    width: 75%;
+  }
+  .form{
+    width: 60%;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .container{
+    width: 80%;
+  }
+  .form{
+    width: 70%;
+  }
+  .image-card-container, .card-container{
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+@media screen and (max-width: 1000px) {
+  .container{
+    width: 90%;
+  }
+  .form{
+    width: 80%;
+  }
+  .carousel-container{
+    gap: 0.5rem;
+  }
+  .carousel-image{
+    height: 80%;
+    width: 75%;
+  }
+  .close-carousel{
+    top: 20px;
+    right: 20px;
+  }
+}
+@media screen and (max-width: 750px) {
+  .form{
+    width: 100%;
+  }
+  .image-card-container, .card-container{
+    grid-template-columns: 1fr 1fr;
+  }
+  .carousel-button{
+    height: 3rem;
+    font-size: 1.5rem;
+  }
+  #brand-info{
+    margin: 0 auto;
+  }
+}
+@media screen and (max-width: 600px) {
+  .form label {
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+  .header h1{
+    font-size: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .form label {
+    font-size: 1.4rem;
+    font-weight: 700;
+  }
+  .form input {
+    padding: 10px 10px;
+    font-size: 1rem;
+}
+.form .button {
+  font-size: 1rem;
+  padding: 8px 20px;
+}
+  .header h1 {
+    font-size: 1.4rem;
+    text-align: center;
+  }
+
+  .button {
+    padding: 5px 7px;
+    font-size: 0.6rem;
+    font-weight: 700;
+  }
+
+  .back-button {
+    height: 2rem;
+    aspect-ratio: 1;
+  }
+
+  .back-button img {
+    height: 1rem;
+    width: 1rem;
+  }
+
+  .image-card-container, .card-container {
+    grid-template-columns: 1fr;
+  }
 }
