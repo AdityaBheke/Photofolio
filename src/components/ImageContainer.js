@@ -3,11 +3,13 @@ import ImageForm from "./ImageForm";
 import ImageCard from "./ImageCard";
 import { addDoc, collection, deleteDoc, doc, onSnapshot, query, updateDoc, where } from "firebase/firestore";
 import { db } from "../firebase.config";
+import Carousel from "./Carousel";
 
 function ImageContainer(props) {
     const [imagesList, setImagesList] = useState([]);
     const [isFormOpen, setIsFormOpen] = useState(false);
     const [formData, setFormData] = useState(null);
+    const [selectedIndex, setSelectedIndex] = useState(-1);
     const {album, handleBack} = props;
 
     useEffect(()=>{
@@ -32,13 +34,23 @@ function ImageContainer(props) {
         toggleForm();
     }
     // Function to delete Image
-    async function deleteImage(id) {
+    async function deleteImage(e, id) {
+        e.stopPropagation();
         await deleteDoc(doc(db, "images", id));
     }
     // function to handle onClick of edit button
-    function handleUpdate(updateData){
+    function handleUpdate(e, updateData){
+        e.stopPropagation();
         setIsFormOpen(true);
         setFormData({id: updateData.id, title: updateData.title, src: updateData.src})
+    }
+    // function to handle selection of image
+    function handleSelect(index) {
+        setSelectedIndex(index);
+    }
+    // function to close carousel
+    function closeCarousel() {
+        setSelectedIndex(-1);
     }
     return <div className="container">
     {isFormOpen && <ImageForm addImage={addImage} updateImage={updateImage} formData={formData}/>}
@@ -48,8 +60,9 @@ function ImageContainer(props) {
         <button className={isFormOpen?"button red-outline":"button blue-outline"} onClick={toggleForm}>{isFormOpen?"Cancel":"Add image"}</button>
     </div>
     <div className="image-card-container">
-        {imagesList.map(image=><ImageCard key={image.id} cardInfo={image} handleUpdate={handleUpdate} deleteImage={deleteImage}/>)}
+        {imagesList.map((image,index)=><ImageCard key={image.id} cardInfo={image} index={index} handleSelect={handleSelect} handleUpdate={handleUpdate} deleteImage={deleteImage}/>)}
     </div>
+    {selectedIndex>=0 && <Carousel imagesList={imagesList} selectedIndex={selectedIndex} closeCarousel={closeCarousel}/>}
     </div>
 }
 export default ImageContainer;
