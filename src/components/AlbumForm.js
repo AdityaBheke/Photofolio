@@ -2,11 +2,13 @@ import { useRef } from "react";
 
 function AlbumForm(props) {
     const titleRef = useRef(null);
+    // Function to handle submit
     function handleSubmit(e){
         e.preventDefault();
         props.addAlbum({title: titleRef.current.value});
         clearForm();
     }
+    // Function to clear form
     function clearForm(){
         titleRef.current.value = ""
     }

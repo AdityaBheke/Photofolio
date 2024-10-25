@@ -14,7 +14,7 @@ function ImageContainer(props) {
     const [selectedIndex, setSelectedIndex] = useState(-1);
     const [isLoading, setIsLoading] = useState(true);
     const {album, handleBack} = props;
-
+    // initial fetching images from specific album
     useEffect(()=>{
         onSnapshot(query(collection(db, 'images'),where("albumId","==", album.id)),(snapshot)=>{
             const imageDocs = snapshot.docs.map(doc=>{return {id:doc.id, ...doc.data()}})
