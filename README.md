@@ -1,6 +1,6 @@
 # Photofolio
 
-[🔗 Live Preview](your-hosted-link)
+[🔗 Live Preview](https://adityab-photofolio.netlify.app/)
 
 Photofolio is a photo album management application that allows users to create and view albums with images in real-time. Built with React functional components, hooks, and Firebase, it provides a dynamic and interactive experience for organizing and displaying images.
 
